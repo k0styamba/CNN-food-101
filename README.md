@@ -1,30 +1,58 @@
-# Food-101 classification example using CNN on tf 2.x + keras
+# Отчет
 
-The goal of that lab is to create CNN that solves Food-101 Classification task
-
-Pre-requisites:
-1. TensorFlow 2.x environment
-
-Steps to reproduce results:
-1. Clone the repository:
+##Архитектура нейронной сети
+1.Слой свертки(Conv2D), 3х3 ядро, 8 фильтров
+```phyton
+x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
 ```
-git clone git@github.com:AlexanderSoroka/CNN-food-101.git
+2.Слой пулинга(MaxPool2D) - выбор макс. значения в окне
+```phyton
+x = tf.keras.layers.MaxPool2D()(x)
 ```
-2. Download [Food-101](https://www.kaggle.com/kmader/food41) from kaggle to archive.zip
-- unpack dataset `unzip archive.zip`
-- change current directory to the folder with unpacked dataset
-
-3. Generate TFRecords with build_image_data.py script:
-
+3. "Сдавливание"(Flatten) матрицы признаков в одномерный вектор
+```phyton
+x = tf.keras.layers.Flatten()(x)
 ```
-python build_image_data.py --input <dataset root path> --output <tf output path>
+4.Слой в котором каждый нейрон связян со всеми входами(Dense)
+```phyton
+outputs = tf.keras.layers.Dense(NUM_CLASSES, activation=tf.keras.activations.softmax)(x)
+```
+NUM_CLASSES = 101 - кол-во выходов
+activation=tf.keras.activations.softmax - преобразует вектор входных данных в вектор вероятностных распределений
+
+##Графики обучения
+1.Оригинал
+```phyton
+  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(input)
+  x = tf.keras.layers.MaxPool2D()(x)
+  x = tf.keras.layers.Flatten()(x)
 ```
 
-Validate that total size of generated tfrecord files is close ot original dataset size
+График метрики качества оригинала
+![DefMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_categorical_accuracy.svg)
 
-4. Run train.py to train pre-defined CNN:
-```
-python train.py --train '<dataset root path>/train*'
+График функиции потерь оригинала
+![DefLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_loss.svg)
+
+2.Модифицированная структура
+```phyton
+  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(inputs)
+  x = tf.keras.layers.MaxPool2D()(x)
+  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
+  x = tf.keras.layers.MaxPool2D()(x)
+  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
+  x = tf.keras.layers.MaxPool2D()(x)
+  x = tf.keras.layers.MaxPool2D()(x)
+  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
+  x = tf.keras.layers.MaxPool2D()(x)
+  x = tf.keras.layers.Flatten()(x)
 ```
 
-5. Modify model and have fun
+График метрики качества модифицированной структуры
+![MyMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_categorical_accuracy.svg)
+
+График функиции потерь модифицированной структуры
+![MyLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_loss.svg)
+
+##Анализ
+Судя по графикам удалось значительно уменьшить ошибку сети, по сравнению с оригиналом. Это произошло благодара добавлению 3ех слоев свертки с ядром 3х3 и 8-ю фильтрами (как в оригинале) и 4ех слоев пулинга, что также повлияло на скорость обучения сети(уменьшилась). Т.к. графики train и validation находятся в приблизительно одинаковых значениях и имеют приблизительно одинаковую форму, можно сделать вывод, что сеть не переобучилась.
