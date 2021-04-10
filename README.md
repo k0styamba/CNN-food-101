@@ -17,7 +17,8 @@ x = tf.keras.layers.Flatten()(x)
 ```phyton
 outputs = tf.keras.layers.Dense(NUM_CLASSES, activation=tf.keras.activations.softmax)(x)
 ```
-NUM_CLASSES = 101 - кол-во выходов
+NUM_CLASSES = 101 - кол-во выходов.
+
 activation=tf.keras.activations.softmax - преобразует вектор входных данных в вектор вероятностных распределений
 
 ## Графики обучения
