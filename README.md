@@ -21,6 +21,8 @@ NUM_CLASSES = 101 - кол-во выходов
 activation=tf.keras.activations.softmax - преобразует вектор входных данных в вектор вероятностных распределений
 
 ## Графики обучения
+![image](https://user-images.githubusercontent.com/76451709/114280593-a9aae380-9a42-11eb-9187-7c12c1de30e9.png)
+
 1.Оригинал
 ```phyton
   x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(input)
