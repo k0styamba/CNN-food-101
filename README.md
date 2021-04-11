@@ -37,7 +37,7 @@ activation=tf.keras.activations.softmax - преобразует вектор в
 График функиции потерь оригинала
 ![DefLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_loss.svg)
 
-2.Модифицированная структура
+2.Модифицированная архитектура
 ```phyton
   x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(inputs)
   x = tf.keras.layers.MaxPool2D()(x)
@@ -51,10 +51,10 @@ activation=tf.keras.activations.softmax - преобразует вектор в
   x = tf.keras.layers.Flatten()(x)
 ```
 
-График метрики качества модифицированной структуры
+График метрики качества модифицированной архитектуры
 ![MyMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_categorical_accuracy.svg)
 
-График функиции потерь модифицированной структуры
+График функиции потерь модифицированной архитектуры
 ![MyLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_loss.svg)
 
 ## Анализ
