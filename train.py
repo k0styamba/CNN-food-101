@@ -76,7 +76,7 @@ def main():
   model = build_model()
 
   model.compile(
-    optimizer=tf.optimizers.Adam(lr=0.0001),
+    optimizer=tf.optimizers.Adam(lr=0.001),
     loss=tf.keras.losses.categorical_crossentropy,
     metrics=[tf.keras.metrics.categorical_accuracy],
   )
@@ -88,6 +88,7 @@ def main():
     validation_data=validation_dataset,
     callbacks=[
       tf.keras.callbacks.TensorBoard(log_dir),
+      LearningRateScheduler(tf.keras.experimental.CosineDecay(0.002, 500, 0.0, None)),
     ]
   )
 
