@@ -3,9 +3,9 @@
 ## Графики обучения нейронной сети EfficientNetB0
 ### 1.Графики обучения с фиксированными темпами обучения
 
-Красный - lr = 0.0001
-Оранжевый - lr = 0.001
-Синий - lr = 0.01
+Красный - lr = 0.0001.
+Оранжевый - lr = 0.001.
+Синий - lr = 0.01.
 
 Метрика качества
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Static/epoch_categorical_accuracy.svg)
