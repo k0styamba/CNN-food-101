@@ -1,61 +1,53 @@
-# Отчет по ЛР №1
+# Отчет по ЛР №3
 
-## Архитектура нейронной сети
-1.Слой свертки(Conv2D), 3х3 ядро, 8 фильтров
-```phyton
-x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-```
-2.Слой пулинга(MaxPool2D) - выбор макс. значения в окне
-```phyton
-x = tf.keras.layers.MaxPool2D()(x)
-```
-3. "Сдавливание"(Flatten) матрицы признаков в одномерный вектор
-```phyton
-x = tf.keras.layers.Flatten()(x)
-```
-4.Слой в котором каждый нейрон связян со всеми входами(Dense)
-```phyton
-outputs = tf.keras.layers.Dense(NUM_CLASSES, activation=tf.keras.activations.softmax)(x)
-```
-NUM_CLASSES = 101 - кол-во выходов.
+## Графики обучения нейронной сети EfficientNetB0 (validation)
+### 1.Графики обучения с фиксированными темпами обучения
 
-activation=tf.keras.activations.softmax - преобразует вектор входных данных в вектор вероятностных распределений
+Красный - lr = 0.0001.
 
-## Графики обучения
-![image](https://user-images.githubusercontent.com/76451709/114280593-a9aae380-9a42-11eb-9187-7c12c1de30e9.png)
+Оранжевый - lr = 0.001.
 
-1.Оригинал
-```phyton
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(input)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Flatten()(x)
+Синий - lr = 0.01.
+
+Метрика качества
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Static/epoch_categorical_accuracy.svg)
+
+Функция потерь
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Static/epoch_loss.svg)
+
+### 2.Графики обучения с использованием CosineDecay
+
+CosineDecay с начальным lr = 0.0011 - Оранжевый
+```python
+LearningRateScheduler(tf.keras.experimental.CosineDecay(0.0011, 500, 0.0, None))
+```
+CosineDecay с начальным lr = 0.00011 - Синий
+```python
+LearningRateScheduler(tf.keras.experimental.CosineDecay(0.00011, 500, 0.0, None))
 ```
 
-График метрики качества оригинала
-![DefMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_categorical_accuracy.svg)
+Метрика качества
+![3](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecay/epoch_categorical_accuracy.svg)
 
-График функиции потерь оригинала
-![DefLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_loss.svg)
+Функция потерь
+![4](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecay/epoch_loss.svg)
 
-2.Модифицированная архитектура
-```phyton
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(inputs)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Flatten()(x)
+### 3.Графики обучения с использованием CosineDecayRestarts
+
+CosineDecayRestarts с начальным lr = 0.0011 - Голубой
+```python
+LearningRateScheduler(tf.keras.experimental.CosineDecay(0.0011, 500, 2.0, 1.0, 0.0, None))
+```
+CosineDecayRestarts с начальным lr = 0.00011 - Красный
+```python
+LearningRateScheduler(tf.keras.experimental.CosineDecay(0.00011, 500, 2.0, 1.0, 0.0, None))
 ```
 
-График метрики качества модифицированной архитектуры
-![MyMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_categorical_accuracy.svg)
+Метрика качества
+![5](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecayRestarts/epoch_categorical_accuracy.svg)
 
-График функиции потерь модифицированной архитектуры
-![MyLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_loss.svg)
+Функция потерь
+![6](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecayRestarts/epoch_loss.svg)
 
 ## Анализ
-В результате сравнения графиков оригинальной архитектуры и модифицированной, можно сделать вывод, что добавление 3ех слоев свертки и 4ех слоев пулинга к исправлению ошибки при обучении не привело. Это связано с тем, что оригинальная архитектура содержала крайне малое кол-во слоев, а модифицированная была "собрана" произвольно.
+Проанализировав графики фиксированных значений, был сделан вывод, что сеть, которая обучалась с параметром lr = 0.01, имеет значения точности ниже чем те, у которых темп обучения был равен 0.001 и 0.0001(на 5% и 8% соответсвенно). В дальнейшем работы проводились именно с ними. Была совершена попытка увеличить точность нейронной сети при помощи CosineDecay(косинусное затухание темпа обучения). Начальные значения темпа обучения были выбраны немного выше, чем предыдущие оптимальные - 0.0011, 0.00011 соответственно. Было выбрано кол-во итераций равное 500, а минимальное значение темпа обучения равное 0 (500 * 0,0). К каким либо улучшениям это не привело. В дальнейшем была использована CosineDecayRestarts (косинусное затухание с рестартами). Данный метод может помочь выбраться из "узкого" локального минимума. Параметры начального темпа обучения, кол-ва начальных итераций, и минимальной темп обучения остались неизменными, параметру отвечающему за кол-во итераций на i-том периоде было присвоено значение 2,0 (на первом периоде 500, на втором 1000 итераций и тд), а параметру отвечающему за начальный темп обучения на периоде - 1,0(остается всегда неизменным). Это также к значительным улучшениям не привело. Из этого можно утверждать что, был найден стабильный локальный минимум.
