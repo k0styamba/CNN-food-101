@@ -73,7 +73,7 @@ def main():
 
   model = build_model()
 
-  lrcd = tf.keras.experimental.CosineDecayRestarts(0.0011, 500, 0.5, 1.0, 0.0, None)
+  lrcd = tf.keras.experimental.CosineDecayRestarts(0.01, 1000, 1.0, 0.75, 0.001, None)
 
   model.compile(
     optimizer=tf.optimizers.Adam(lrcd),
