@@ -115,8 +115,46 @@ LearningRateScheduler(tf.keras.experimental.CosineDecayRestarts(0.0011, 500, 2.0
 Функция потерь (validation)
 ![6](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecayRestarts/epoch_loss%20-%20CosineDecayRestarts%20-%20validation.svg)
 
+![33](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecayRestarts/CosineDecayRestarts%20-%20train.png)
+
 Функция потерь (train)
 ![6](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecayRestarts/epoch_loss%20-%20CosineDecayRestarts%20-%20train.svg)
+
+### 4.Графики обучения с оптимальными значениями параметров
+
+Оптимальным значением фиксированного темпа обучения оказалось lr = 0.0001 - синий(validation) - оранжевый(train)
+
+```python
+optimizer=tf.optimizers.Adam(lr=0.001)
+```
+
+Оптимальным значением параметров для темпа обучения с косинусным затуханием (CosineDecay(0.00011, 500, 0.0, None)) - голубой(validation) - коричневый(train)
+
+```python
+LearningRateScheduler(tf.keras.experimental.CosineDecay(0.00011, 500, 0.0, None))
+```
+
+Оптимальным значением параметров для темпа обучения с косинусным затуханием с рестартом (CosineDecayRestarts(0.00011, 500, 2.0, 1.0, 0.0, None)) - зеленый(validation) - розовый(train)
+
+```python
+LearningRateScheduler(tf.keras.experimental.CosineDecayRestarts(0.00011, 500, 2.0, 1.0, 0.0, None))
+```
+
+![33](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Optimal/validation.png)
+
+Метрика качества (validation)
+
+![6](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Optimal/epoch_categorical_accuracy%20-%20validation.svg)
+
+Функция потерь (validation)
+
+![6](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Optimal/epoch_loss%20-%20validation.svg)
+
+![33](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Optimal/train.png)
+
+Функция потерь (train)
+
+![6](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Optimal/epoch_loss%20-%20train.svg)
 
 ## Анализ
 
