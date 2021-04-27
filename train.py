@@ -88,7 +88,7 @@ def main():
     validation_data=validation_dataset,
     callbacks=[
       tf.keras.callbacks.TensorBoard(log_dir),
-      LearningRateScheduler(tf.keras.experimental.CosineDecay(0.007, 200, 0.3, None)),
+      LearningRateScheduler(tf.keras.experimental.CosineDecay(0.0005, 300, 0.1, None)),
     ]
   )
 
