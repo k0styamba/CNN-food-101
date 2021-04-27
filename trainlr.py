@@ -24,7 +24,7 @@ LOG_DIR = 'logslr'
 BATCH_SIZE = 128
 NUM_CLASSES = 101
 RESIZE_TO = 224
-TRAIN_SIZE = 101000
+TRAIN_SIZE = 10100
 
 
 def parse_proto_example(proto):
@@ -34,7 +34,7 @@ def parse_proto_example(proto):
   }
   example = tf.io.parse_single_example(proto, keys_to_features)
   example['image'] = tf.image.decode_jpeg(example['image/encoded'], channels=3)
-  example['image'] = tf.image.convert_image_dtype(example['image'], dtype=tf.uint8)
+  example['image'] = tf.image.convert_image_dtype(example['image'], dtype=tf.float32)
   example['image'] = tf.image.resize(example['image'], tf.constant([RESIZE_TO, RESIZE_TO]))
   return example['image'], tf.one_hot(example['image/label'], depth=NUM_CLASSES)
 
@@ -50,6 +50,7 @@ def create_dataset(filenames, batch_size):
   """
   return tf.data.TFRecordDataset(filenames)\
     .map(parse_proto_example, num_parallel_calls=tf.data.AUTOTUNE)\
+    .map(normalize)\
     .batch(batch_size)\
     .prefetch(tf.data.AUTOTUNE)
 
@@ -67,13 +68,12 @@ def main():
   args = args.parse_args()
 
   dataset = create_dataset(glob.glob(args.train), BATCH_SIZE)
-  train_size = int(TRAIN_SIZE * 0.7 / BATCH_SIZE)
+  train_size = int(TRAIN_SIZE * 0.9 / BATCH_SIZE)
   train_dataset = dataset.take(train_size)
-  validation_dataset = dataset.skip(train_size)
 
   model = build_model()
 
-  lrcd = tf.keras.experimental.CosineDecayRestarts(0.01, 1000, 1.0, 0.75, 0.001, None)
+  lrcd = tf.keras.experimental.CosineDecayRestarts(0.0011, 500, 0.5, 1.0, 0.0, None)
 
   model.compile(
     optimizer=tf.optimizers.Adam(lrcd),
@@ -85,7 +85,6 @@ def main():
   model.fit(
     train_dataset,
     epochs=50,
-    validation_data=validation_dataset,
     callbacks=[
       tf.keras.callbacks.TensorBoard(log_dir),
     ]
