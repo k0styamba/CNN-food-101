@@ -6,6 +6,7 @@ __author__ = 'Alexander Soroka, soroka.a.m@gmail.com'
 __copyright__ = """Copyright 2020 Alexander Soroka"""
 
 
+import matplotlib.pyplot as plt
 import argparse
 import glob
 import numpy as np
@@ -56,7 +57,8 @@ def create_dataset(filenames, batch_size):
 
 def build_model():
   inputs = tf.keras.Input(shape=(RESIZE_TO, RESIZE_TO, 3))
-  model = tf.keras.applications.EfficientNetB0(include_top=False, input_tensor=inputs, weights='imagenet')
+  data_aug = tf.keras.layers.experimental.preprocessing.RandomFlip(mode = "horizontal_and_vertical", seed=None, name=None)(inputs)
+  model = tf.keras.applications.EfficientNetB0(include_top=False, input_tensor=data_aug, weights='imagenet')
   model.trainable = False
   x = tf.keras.layers.GlobalAveragePooling2D()(model.output)
   outputs = tf.keras.layers.Dense(NUM_CLASSES, activation=tf.keras.activations.softmax)(x)
@@ -76,7 +78,7 @@ def main():
   model = build_model()
 
   model.compile(
-    optimizer=tf.optimizers.Adam(lr=0.001),
+    optimizer=tf.optimizers.Adam(lr=0.0001),
     loss=tf.keras.losses.categorical_crossentropy,
     metrics=[tf.keras.metrics.categorical_accuracy],
   )
@@ -88,7 +90,6 @@ def main():
     validation_data=validation_dataset,
     callbacks=[
       tf.keras.callbacks.TensorBoard(log_dir),
-      LearningRateScheduler(tf.keras.experimental.CosineDecay(0.0005, 300, 0.1, None)),
     ]
   )
 
