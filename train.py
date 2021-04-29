@@ -58,7 +58,7 @@ def create_dataset(filenames, batch_size):
 
 def build_model():
   inputs = tf.keras.Input(shape=(RESIZE_TO, RESIZE_TO, 3))
-  data_aug = tf.keras.layers.experimental.preprocessing.RandomRotation(0.3, fill_mode='reflect', interpolation='bilinear',seed=None, name=None)(inputs)
+  data_aug = tf.keras.layers.experimental.preprocessing.RandomRotation(0.05, fill_mode='constant', interpolation = 'bilinear',seed=None, name=None, fill_value=0.0)(inputs)
   model = tf.keras.applications.EfficientNetB0(include_top=False, input_tensor=data_aug, weights='imagenet')
   model.trainable = False
   x = tf.keras.layers.GlobalAveragePooling2D()(model.output)
@@ -87,7 +87,7 @@ def main():
   log_dir='{}/f101-{}'.format(LOG_DIR, time.time())
   model.fit(
     train_dataset,
-    epochs=50,
+    epochs=30,
     validation_data=validation_dataset,
     callbacks=[
       tf.keras.callbacks.TensorBoard(log_dir),
