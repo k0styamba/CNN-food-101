@@ -14,6 +14,7 @@ import tensorflow as tf
 import time
 from tensorflow.python import keras as keras
 from tensorflow.python.keras.callbacks import LearningRateScheduler
+from tensorflow.keras.layers.experimental import preprocessing
 
 # Avoid greedy memory allocation to allow shared GPU usage
 gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -57,7 +58,7 @@ def create_dataset(filenames, batch_size):
 
 def build_model():
   inputs = tf.keras.Input(shape=(RESIZE_TO, RESIZE_TO, 3))
-  data_aug = tf.keras.layers.experimental.preprocessing.RandomFlip(mode = "vertical", seed=None, name=None)(inputs)
+  data_aug = tf.keras.layers.experimental.preprocessing.RandomRotation(0.3, fill_mode='reflect', interpolation='bilinear',seed=None, name=None)(inputs)
   model = tf.keras.applications.EfficientNetB0(include_top=False, input_tensor=data_aug, weights='imagenet')
   model.trainable = False
   x = tf.keras.layers.GlobalAveragePooling2D()(model.output)
