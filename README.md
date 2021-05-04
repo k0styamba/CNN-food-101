@@ -12,17 +12,17 @@ tf.keras.layers.experimental.preprocessing.RandomFlip(mode= ... , seed=None, nam
 
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/Validation.png)
 
-Метрика качества
+Метрика качества(validation)
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_categorical_accuracy_validation.svg)
 
-Функция потерь
+Функция потерь(validation)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_loss_validation.svg)
 
 Легенда(train) с указанными соответствующими параметрами
 
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/Train.png)
 
-Функция потерь
+Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_loss_train.svg)
 
 ### 2.Графики обучения с использованием техники аугментации - RandomRotation
@@ -35,20 +35,20 @@ tf.keras.layers.experimental.preprocessing.RandomRotation(factor = ... , fill_mo
 
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/Validation.png)
 
-Метрика качества
+Метрика качества(validation)
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_categorical_accuracy_validation.svg)
 
-Функция потерь
+Функция потерь(validation)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_loss_validation.svg)
 
 Легенда(train) с указанными соответствующими параметрами
 
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/Train.png)
 
-Функция потерь
+Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_loss_train.svg)
 
-### 3.Графики обучения с использованием CosineDecayRestarts
+### 3.Графики обучения с использованием техники аугментации - random_crop
 
 Задаем "изначальное" разрешение изображения
 
@@ -71,17 +71,17 @@ def process_data(image, label):
 
 ![5](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/Validation.png)
 
-Метрика качества
+Метрика качества(validation)
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/epoch_categorical_accuracy_validation.svg)
 
-Функция потерь
+Функция потерь(validation)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/epoch_loss_validation.svg)
 
 Легенда(train) с указанными соответствующими параметрами
 
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/Train.png)
 
-Функция потерь
+Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/epoch_loss_train.svg)
 
 ## Анализ
