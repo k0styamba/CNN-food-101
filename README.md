@@ -127,7 +127,7 @@ tf.keras.layers.experimental.preprocessing.RandomFlip(mode = 'horizontal' , seed
 ![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/OptimalComb/epoch_categorical_accuracy.svg)
 
 Функция потерь
-![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/epoch_loss_train.svg)
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/OptimalComb/epoch_loss.svg)
 
 Пример аугментированного изображения комбинации техник аугментации с оптимальными параметрами
 
