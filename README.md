@@ -151,4 +151,5 @@ tf.keras.layers.experimental.preprocessing.RandomFlip(mode = 'horizontal' , seed
 * с RandomFlip(67,71%) уменьшилось на 0,17% 
 * с RandomRotation(67.1%) увеличилось на 0,44%
 * c random_crop(68,13%) уменьшимлось на 0.59%
+
 По сравнению с оригиналом наиболее выгодной техникой аугментации данных оказалась random_crop - +1,08%, однако все значение не сильно разнятся.
