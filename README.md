@@ -25,7 +25,7 @@ tf.keras.layers.experimental.preprocessing.RandomFlip(mode = '...' , seed=None, 
 Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_loss_train.svg)
 
-Пример аугментированного изображения
+Пример аугментированного изображения полученного при использовании оптимальных параметров
 
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalFlipSample.jpg)
 
@@ -52,7 +52,7 @@ tf.keras.layers.experimental.preprocessing.RandomRotation(factor = ... , fill_mo
 Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_loss_train.svg)
 
-Пример аугментированного изображения
+Пример аугментированного изображения полученного при использовании оптимальных параметров
 
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalRotationSample.jpg)
 
@@ -92,7 +92,7 @@ def process_data(image, label):
 Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/epoch_loss_train.svg)
 
-Пример аугментированного изображения
+Пример аугментированного изображения полученного при использовании оптимальных параметров
 
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalCropSample.jpg)
 
@@ -129,7 +129,7 @@ tf.keras.layers.experimental.preprocessing.RandomFlip(mode = 'horizontal' , seed
 Функция потерь
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomCrop/epoch_loss_train.svg)
 
-Пример аугментированного изображения
+Пример аугментированного изображения комбинации техник аугментации с оптимальными параметрами
 
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalComboSample.jpg)
 
