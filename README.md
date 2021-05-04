@@ -20,22 +20,24 @@
 Функция потерь
 ![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_loss_train.svg)
 
-### 2.Графики обучения с использованием CosineDecay
+### 2.Графики обучения с использованием техники аугментации - RandomRotation
 
-CosineDecay с начальным lr = 0.0011 - Оранжевый
-```python
-LearningRateScheduler(tf.keras.experimental.CosineDecay(0.0011, 500, 0.0, None))
-```
-CosineDecay с начальным lr = 0.00011 - Синий
-```python
-LearningRateScheduler(tf.keras.experimental.CosineDecay(0.00011, 500, 0.0, None))
-```
+Легенда(validation) с указанными соответствующими параметрами
+
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/Validation.png)
 
 Метрика качества
-![3](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecay/epoch_categorical_accuracy.svg)
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_categorical_accuracy_validation.svg)
 
 Функция потерь
-![4](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/CosineDecay/epoch_loss.svg)
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_loss_validation.svg)
+
+Легенда(train) с указанными соответствующими параметрами
+
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/Train.png)
+
+Функция потерь
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomRotation/epoch_loss_train.svg)
 
 ### 3.Графики обучения с использованием CosineDecayRestarts
 
