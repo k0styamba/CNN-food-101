@@ -3,18 +3,22 @@
 ## Графики обучения нейронной сети EfficientNetB0
 ### 1.Графики обучения с использованием техники аугментации данных - RandomFlip
 
+Легенда(validation) с указанными соответствующими параметрами
 
-Красный - lr = 0.0001.
-
-Оранжевый - lr = 0.001.
-
-Синий - lr = 0.01.
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/Validation.png)
 
 Метрика качества
-![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Static/epoch_categorical_accuracy.svg)
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_categorical_accuracy_validation.svg)
 
 Функция потерь
-![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab3/Graphs/Static/epoch_loss.svg)
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_loss_validation.svg)
+
+Легенда(train) с указанными соответствующими параметрами
+
+![1](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/Train.png)
+
+Функция потерь
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/Graphs/RandomFlip/epoch_loss_train.svg)
 
 ### 2.Графики обучения с использованием CosineDecay
 
