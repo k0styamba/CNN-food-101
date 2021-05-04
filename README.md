@@ -94,7 +94,7 @@ def process_data(image, label):
 
 Пример аугментированного изображения
 
-![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalCropSample.jpg)
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalComboSample.jpg)
 
 ### 4.Графики обучения с использованием комбинации техник аугментации с оптимальными параметрами - random_crop -> RandomRotation -> RandomFlip
 
