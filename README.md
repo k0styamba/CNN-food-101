@@ -5,7 +5,7 @@
 
 
 ```python
-tf.keras.layers.experimental.preprocessing.RandomFlip(mode= ... , seed=None, name=None)
+tf.keras.layers.experimental.preprocessing.RandomFlip(mode = '...' , seed=None, name=None)
 ```
 
 Легенда(validation) с указанными соответствующими параметрами
@@ -28,7 +28,7 @@ tf.keras.layers.experimental.preprocessing.RandomFlip(mode= ... , seed=None, nam
 ### 2.Графики обучения с использованием техники аугментации - RandomRotation
 
 ```python
-tf.keras.layers.experimental.preprocessing.RandomRotation(factor = ... , fill_mode= ... , interpolation = ... ,seed=None, name=None, fill_value=0.0)
+tf.keras.layers.experimental.preprocessing.RandomRotation(factor = ... , fill_mode = ... , interpolation = ... ,seed=None, name=None, fill_value=0.0)
 ```
 
 Легенда(validation) с указанными соответствующими параметрами
