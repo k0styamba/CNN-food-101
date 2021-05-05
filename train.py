@@ -14,6 +14,7 @@ import tensorflow as tf
 import time
 from tensorflow.python import keras as keras
 from tensorflow.python.keras.callbacks import LearningRateScheduler
+from tensorflow.keras import layers
 from tensorflow.keras.layers.experimental import preprocessing
 
 # Avoid greedy memory allocation to allow shared GPU usage

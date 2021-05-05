@@ -6,7 +6,6 @@ __author__ = 'Alexander Soroka, soroka.a.m@gmail.com'
 __copyright__ = """Copyright 2020 Alexander Soroka"""
 
 
-import matplotlib.pyplot as plt
 import argparse
 import glob
 import numpy as np
@@ -14,6 +13,7 @@ import tensorflow as tf
 import time
 from tensorflow.python import keras as keras
 from tensorflow.python.keras.callbacks import LearningRateScheduler
+from tensorflow.keras import layers
 from tensorflow.keras.layers.experimental import preprocessing
 
 # Avoid greedy memory allocation to allow shared GPU usage
@@ -66,8 +66,6 @@ def create_dataset(filenames, batch_size):
 
 def build_model():
   inputs = tf.keras.Input(shape=(RESIZE_TO, RESIZE_TO, 3))
-  data_aug = tf.keras.layers.experimental.preprocessing.RandomRotation(0.05, fill_mode='constant', interpolation = 'bilinear' ,seed=None, name=None, fill_value=0.0)(inputs)
-  data_aug = tf.keras.layers.experimental.preprocessing.RandomFlip('horizontal')(data_aug)
   model = tf.keras.applications.EfficientNetB0(include_top=False, input_tensor=data_aug, weights='imagenet')
   model.trainable = False
   x = tf.keras.layers.GlobalAveragePooling2D()(model.output)
