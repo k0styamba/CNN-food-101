@@ -1,61 +1,42 @@
-# Отчет по ЛР №1
+# Отчет по ЛР №5
 
-## Архитектура нейронной сети
-1.Слой свертки(Conv2D), 3х3 ядро, 8 фильтров
-```phyton
-x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-```
-2.Слой пулинга(MaxPool2D) - выбор макс. значения в окне
-```phyton
-x = tf.keras.layers.MaxPool2D()(x)
-```
-3. "Сдавливание"(Flatten) матрицы признаков в одномерный вектор
-```phyton
-x = tf.keras.layers.Flatten()(x)
-```
-4.Слой в котором каждый нейрон связян со всеми входами(Dense)
-```phyton
-outputs = tf.keras.layers.Dense(NUM_CLASSES, activation=tf.keras.activations.softmax)(x)
-```
-NUM_CLASSES = 101 - кол-во выходов.
+## Графики обучения нейронной сети EfficientNetB0
+### 1.Графики обучения с использованием техники аугментации и политики темпа обучения с оптимальными параметрами
 
-activation=tf.keras.activations.softmax - преобразует вектор входных данных в вектор вероятностных распределений
+Легенда
 
-## Графики обучения
-![image](https://user-images.githubusercontent.com/76451709/114280593-a9aae380-9a42-11eb-9187-7c12c1de30e9.png)
+![1](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Original.png)
 
-1.Оригинал
-```phyton
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(input)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Flatten()(x)
-```
+Метрика качества
+![1](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/epoch_categorical_accuracy_orig.svg)
 
-График метрики качества оригинала
-![DefMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_categorical_accuracy.svg)
+Функция потерь
+![2](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/epoch_loss_orig.svg)
 
-График функиции потерь оригинала
-![DefLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/Default/epoch_loss.svg)
+### 2.Графики обучения с использованием техники обучения FineTuning
 
-2.Модифицированная архитектура
-```phyton
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(inputs)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Conv2D(filters=8, kernel_size=3)(x)
-  x = tf.keras.layers.MaxPool2D()(x)
-  x = tf.keras.layers.Flatten()(x)
-```
+Для данной техники обучения были подобраны значения темпа обучения 1е-6 и 1е-7:
 
-График метрики качества модифицированной архитектуры
-![MyMetr](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_categorical_accuracy.svg)
+Легенда(validation) с указанными соответствующими параметрами
 
-График функиции потерь модифицированной архитектуры
-![MyLoss](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/My/epoch_loss.svg)
+![1](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/FineTuneValidation.png)
+
+Метрика качества(validation)
+![1](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/epoch_categorical_accuracy_fine_validation.svg)
+
+Функция потерь(validation)
+![2](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/epoch_loss_fine_validation.svg)
+
+Легенда(train) с указанными соответствующими параметрами
+
+![1](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/FineTuneTrain.png)
+
+Функция потерь(train)
+![2](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/epoch_loss_fine_train.svg)
+
+Пример аугментированного изображения полученного при использовании оптимальных параметров
+
+![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalRotationSample.jpg)
 
 ## Анализ
-В результате сравнения графиков оригинальной архитектуры и модифицированной, можно сделать вывод, что добавление 3ех слоев свертки и 4ех слоев пулинга к исправлению ошибки при обучении не привело. Это связано с тем, что оригинальная архитектура содержала крайне малое кол-во слоев, а модифицированная была "собрана" произвольно.
+
