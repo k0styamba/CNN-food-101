@@ -34,9 +34,5 @@
 Функция потерь(train)
 ![2](https://github.com/k0styamba/CNN-food-101/blob/master/Graph/epoch_loss_fine_train.svg)
 
-Пример аугментированного изображения полученного при использовании оптимальных параметров
-
-![2](https://github.com/k0styamba/CNN-food-101/blob/myoutputLab4/OptimalRotationSample.jpg)
-
 ## Анализ
 
